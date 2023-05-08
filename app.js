@@ -28,7 +28,7 @@ app.get('/search', (req, res) => {
     return restaurant.name.toLowerCase().includes(keyword.toLowerCase())
         || restaurant.category.toLowerCase().includes(keyword.toLocaleLowerCase())
   }) 
-  res.render('index', { restaurants: restaurants})
+  res.render('index', { restaurants: restaurants, keyword: keyword})
 })
 
 app.listen(port, () => {

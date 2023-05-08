@@ -99,3 +99,16 @@ header {
   }
 
 }
+
+a {
+  text-decoration: none;
+}
+
+.bg-danger {
+  font-size: 14px;
+  padding: 1px;
+}
+
+i {
+  font-size: 10px;
+}
