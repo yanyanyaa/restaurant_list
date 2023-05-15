@@ -3,13 +3,13 @@ const express = require('express')
 const app = express()
 const port = 3000
 const exphbs = require('express-handlebars')
-const Restaurant = require("./models/restaurant")
+const Restaurant = require('./models/restaurant')
+// const restaurantList = require('./restaurant.json')
 
 const mongoose = require("mongoose")
 if (process.env.NODE_ENV !== 'production') {
   require('dotenv').config()
 }
-
 mongoose.connect(process.env.MONGODB_URI, { useNewUrlParser: true, useUnifiedTopology: true })
 
 const db = mongoose.connection
@@ -30,10 +30,10 @@ app.use(express.static('public'))
 
 // routes setting
 app.get('/', (req, res) => {
-  Restaurant.find({})
+  Restaurant.find()
     .lean()
-    .then(restaurants => res.render("index", { restaurants }))
-    .catch(err => console.log(err))
+    .then(restaurants => res.render('index', restaurants))
+    .catch(error => console.log('error'))
 })
 
 app.get('/restaurants/:restaurant_id', (req, res) => {
