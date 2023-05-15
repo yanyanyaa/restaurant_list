@@ -3,7 +3,7 @@ const express = require('express')
 const app = express()
 const port = 3000
 const exphbs = require('express-handlebars')
-const restaurantList = require('./restaurant.json')
+const Restaurant = require("./models/restaurant")
 
 const mongoose = require("mongoose")
 if (process.env.NODE_ENV !== 'production') {
@@ -30,7 +30,10 @@ app.use(express.static('public'))
 
 // routes setting
 app.get('/', (req, res) => {
-  res.render('index', { restaurants: restaurantList.results })
+  Restaurant.find({})
+    .lean()
+    .then(restaurants => res.render("index", { restaurants }))
+    .catch(err => console.log(err))
 })
 
 app.get('/restaurants/:restaurant_id', (req, res) => {
