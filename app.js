@@ -8,6 +8,7 @@ const bodyParser = require('body-parser')
 // const restaurantList = require('./restaurant.json')
 
 const mongoose = require("mongoose")
+const restaurant = require('./models/restaurant')
 if (process.env.NODE_ENV !== 'production') {
   require('dotenv').config()
 }
@@ -54,7 +55,7 @@ app.post('/restaurants', (req, res) => {
     .catch(err => console.log(err))
 })
 
-
+// 瀏覽特定餐廳頁面
 app.get('/restaurants/:id', (req, res) => {
   const id = req.params.id
   return Restaurant.findById(id)
@@ -62,6 +63,28 @@ app.get('/restaurants/:id', (req, res) => {
     .then((restaurant) => res.render('show', { restaurant }))
     .catch(err => console.log(err))
 })
+
+// 更新特定餐廳資訊頁面
+app.get('/restaurants/:id/edit', (req, res) => {
+  const id = req.params.id
+  return Restaurant.findById(id)
+    .lean()
+    .then((restaurant) => res.render('edit', { restaurant }))
+    .catch((err => console.log(err)))
+})
+
+// 更新特定餐廳資訊頁面（按下更新後）
+app.post('/restaurants/:id/edit', (req, res) => {
+  const id = req.params.id
+  const name = req.body.name
+  return Restaurant.findById(id)
+    .then(restaurant => {
+      restaurant.name = name
+      return restaurant.save()
+    })
+    .then(() => res.redirect(`/restaurants/${id}`))
+    .catch(err => console.log(err))
+  })
 
 // app.get('/search', (req, res) => {
 //   const keyword = req.query.keyword3
