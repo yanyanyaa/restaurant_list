@@ -40,6 +40,9 @@
 
       <a class="btn btn-outline-info btn-sm" href="/restaurants/{{ restaurant._id }}/edit" role="button">edit</a>
       <a class="btn btn-outline-info btn-sm" href="/" role="button">back</a>
+      <form action="/restaurants/{{ restaurant._id }}/delete" method="POST" style="display: inline;">
+        <button class="btn btn-outline-info btn-sm" type="submit">delete</button>
+      </form>
     </div>
   </div>
 </div>

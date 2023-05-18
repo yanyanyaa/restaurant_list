@@ -43,6 +43,9 @@
 
               <a class="btn btn-outline-info btn-sm" href="./restaurants/{{ this._id }}" role="button">detail</a>
               <a class="btn btn-outline-info btn-sm" href="./restaurants/{{ this._id }}/edit" role="button">edit</a>
+              <form action="./restaurants/{{ this._id }}/delete" method="POST" style="display: inline;">
+                <button class="btn btn-outline-info btn-sm" type="submit">delete</button>
+              </form>
 
             </div>
           </div>
