@@ -95,14 +95,42 @@ app.post('/restaurants/:id/delete', (req, res) => {
     .catch(err => console.log(err))
 })
 
+
 // app.get('/search', (req, res) => {
-//   const keyword = req.query.keyword3
-//   const restaurants = restaurantList.results.filter(restaurant => {
-//     return restaurant.name.toLowerCase().includes(keyword.toLowerCase())
-//         || restaurant.category.toLowerCase().includes(keyword.toLocaleLowerCase())
-//   }) 
-//   res.render('index', { restaurants: restaurants, keyword: keyword})
+//   const keyword = req.query.keywords
+
+//   Restaurant.find()
+//     .lean()
+//     .then(restaurantsData => {
+//       const restaurants = restaurantsData.results.filter(searchRestaurant => {
+//         return searchRestaurant.name.toLowerCase().includes(keyword.toLowerCase()) 
+//           || searchRestaurant.category.toLowerCase().includes(keyword.toLowerCase())
+//       })
+//       res.render('index', { restaurants, keyword })
+//     })
+//     .catch(err => console.log(err))
 // })
+
+app.get("/search", (req, res) => {
+  if (!req.query.keyword) {
+    res.redirect("/")
+  }
+
+  const keyword = req.query.keyword.trim().toLowerCase()
+ 
+  Restaurant.find({})
+    .lean()
+    .then(restaurantsData => {
+      const restaurants = restaurantsData.filter(
+        data =>
+          data.name.trim().toLowerCase().includes(keyword.trim().toLowerCase()) ||
+          data.category.trim().toLowerCase().includes(keyword.trim().toLowerCase())
+      )
+      res.render('index', { restaurants, keyword })
+    })
+    .catch(err => console.log(err))
+})
+
 
 app.listen(port, () => {
   console.log(`Express is listening on localhost:${port}`)

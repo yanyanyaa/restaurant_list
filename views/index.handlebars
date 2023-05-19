@@ -12,8 +12,8 @@
           </div>
         </div>
       </form>
-      <div class="addNewRestaurant">
-        <a href="./restaurants/new">Add</a>
+      <div class="d-flex justify-content-end mt-3">
+        <a class="btn btn-warning btn-sm" href="./restaurants/new" role="button">Add</a>
       </div>
     </div>
   </div>
@@ -35,8 +35,9 @@
               <div class="restaurant-category mb-1">
                 <i class="fas fa-utensils pe-2"></i>{{this.category}}
               </div>
-
-              <span class="text-white rounded-pill bg-pill bg-danger">
+              
+              
+              <span class="badge badge-lg rounded-pill bg-danger">
                 <i calss="rating px-2">{{this.rating}}</i>
                 <i class="fas fa-star fa-xs"></i>
               </span>
@@ -44,8 +45,9 @@
               <a class="btn btn-outline-info btn-sm" href="./restaurants/{{ this._id }}" role="button">detail</a>
               <a class="btn btn-outline-info btn-sm" href="./restaurants/{{ this._id }}/edit" role="button">edit</a>
               <form action="./restaurants/{{ this._id }}/delete" method="POST" style="display: inline;">
-                <button class="btn btn-outline-info btn-sm" type="submit">delete</button>
+                <button class="btn btn-outline-danger btn-sm" type="submit">delete</button>
               </form>
+              
 
             </div>
           </div>

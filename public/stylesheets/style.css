@@ -56,6 +56,8 @@ header {
 
 .card img {
   height: 180px;
+  object-fit: cover;
+  object-position: center center;
 }
 
 .card-title {
@@ -111,4 +113,12 @@ a {
 
 i {
   font-size: 10px;
+}
+
+.badge {
+  padding: 3px;
+}
+
+.editContainer {
+  max-width: 400px;
 }
