@@ -120,5 +120,9 @@ i {
 }
 
 .editContainer {
-  max-width: 400px;
+  max-width: 500px;
+}
+
+.newContainer {
+  max-width: 500px;
 }

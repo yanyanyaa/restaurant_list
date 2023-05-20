@@ -1,57 +1,61 @@
-<div class="container mt-5">
+<div class="newContainer container mt-5">
 
   <h1>新增一間餐廳</h1>
 
-  <form action="/restaurants" method="POST">
-    <div class="mb-3">
-      <label for="name" class="form-label">店家名稱</label>
-      <input type="text" class="form-control" id="name" name="name" placeholder="例如：一沐日板橋店">
+  <div class="card">
+    <div class="card-body">
+
+      <form action="/restaurants" method="POST">
+        <div class="mb-3">
+          <label for="name" class="form-label">店家名稱</label>
+          <input type="text" class="form-control" id="name" name="name" placeholder="例如：一沐日板橋店">
+        </div>
+      
+        <div class="mb-3">
+          <label for="name_en" class="form-label">店家名稱（英文）</label>
+          <input type="text" class="form-control" id="name_en" name="name_en">
+        </div>
+      
+        <div class="mb-3">
+          <label for="category" class="form-label">店家類別</label>
+          <input type="text" class="form-control" id="category" name="category" placeholder="居酒屋、酒吧、美式餐廳......">
+        </div>
+      
+        <div class="mb-3">
+          <label for="image" class="form-label">參考圖片</label>
+          <input type="text" class="form-control" id="image" name="image" placeholder="URL">
+        </div>
+      
+        <div class="mb-3">
+          <label for="location" class="form-label">地址</label>
+          <input type="text" class="form-control" id="location" name="location" placeholder="新北市板橋區三民路二段19號">
+        </div>
+      
+        <div class="mb-3">
+          <label for="phone" class="form-label">電話</label>
+          <input type="text" class="form-control" id="phone" name="phone" placeholder="02-2955-1219">
+        </div>
+      
+        <div class="mb-3">
+          <label for="google_map" class="form-label">google map</label>
+          <input type="text" class="form-control" id="google_map" name="google_map" placeholder="URL">
+        </div>
+      
+        <div class="mb-3">
+          <label for="rating" class="form-label">評分</label>
+          <input type="number" class="form-control" id="rating" name="rating" placeholder="請輸入 1~5">
+        </div>
+      
+        <div class="mb-3">
+          <label for="description" class="form-label">介紹</label>
+          <input type="text" class="form-control" id="description" name="description" placeholder="請輸入......">
+        </div>
+      
+        <button id="submit-btn" type="submit" class="btn btn-primary">建立</button>
+      </form>
+
     </div>
-
-    <div class="mb-3">
-      <label for="name_en" class="form-label">店家名稱（英文）</label>
-      <input type="text" class="form-control" id="name_en" name="name_en">
-    </div>
-
-    <div class="mb-3">
-      <label for="category" class="form-label">店家類別</label>
-      <input type="text" class="form-control" id="category" name="category" placeholder="居酒屋、酒吧、美式餐廳......">
-    </div>
-
-    <div class="mb-3">
-      <label for="image" class="form-label">參考圖片</label>
-      <input type="text" class="form-control" id="image" name="image" placeholder="URL">
-    </div>
-
-    <div class="mb-3">
-      <label for="location" class="form-label">地址</label>
-      <input type="text" class="form-control" id="location" name="location" placeholder="新北市板橋區三民路二段19號">
-    </div>
-
-    <div class="mb-3">
-      <label for="phone" class="form-label">電話</label>
-      <input type="text" class="form-control" id="phone" name="phone" placeholder="02-2955-1219">
-    </div>
-
-    <div class="mb-3">
-      <label for="google_map" class="form-label">google map</label>
-      <input type="text" class="form-control" id="google_map" name="google_map" placeholder="URL">
-    </div>
-
-    <div class="mb-3">
-      <label for="rating" class="form-label">評分</label>
-      <input type="number" class="form-control" id="rating" name="rating" placeholder="請輸入 1~5">
-    </div>
-
-    <div class="mb-3">
-      <label for="description" class="form-label">介紹</label>
-      <input type="text" class="form-control" id="description" name="description" placeholder="請輸入......">
-    </div>
-
-    <button id="submit-btn" type="submit" class="btn btn-primary">建立</button>
-
-
-  </form>
+  </div>
 
 </div>
 
