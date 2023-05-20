@@ -5,7 +5,7 @@ const port = 3000
 const exphbs = require('express-handlebars')
 const Restaurant = require('./models/restaurant')
 const bodyParser = require('body-parser')
-// const restaurantList = require('./restaurant.json')
+const methodOverride = require('method-override')
 
 const mongoose = require("mongoose")
 const restaurant = require('./models/restaurant')
@@ -32,6 +32,9 @@ app.use(express.static('public'))
 
 // setting body-parser
 app.use(express.urlencoded({ extended: true }))
+
+// setting method-override
+app.use(methodOverride('_method'))
 
 // routes setting
 // 首頁
@@ -75,20 +78,15 @@ app.get('/restaurants/:id/edit', (req, res) => {
 })
 
 // 更新特定餐廳資訊頁面（按下更新後）
-app.post('/restaurants/:id/edit', (req, res) => {
+app.put('/restaurants/:id', (req, res) => {
   const id = req.params.id
-  const name = req.body.name
-  return Restaurant.findById(id)
-    .then(restaurant => {
-      restaurant.name = name
-      return restaurant.save()
-    })
+  return Restaurant.findByIdAndUpdate(id, req.body)
     .then(() => res.redirect(`/restaurants/${id}`))
     .catch(err => console.log(err))
   })
 
 // 刪除頁面
-app.post('/restaurants/:id/delete', (req, res) => {
+app.delete('/restaurants/:id', (req, res) => {
   const id = req.params.id
   return Restaurant.findById(id)
     .then(restaurant => restaurant.remove())
@@ -96,22 +94,7 @@ app.post('/restaurants/:id/delete', (req, res) => {
     .catch(err => console.log(err))
 })
 
-
-// app.get('/search', (req, res) => {
-//   const keyword = req.query.keywords
-
-//   Restaurant.find()
-//     .lean()
-//     .then(restaurantsData => {
-//       const restaurants = restaurantsData.results.filter(searchRestaurant => {
-//         return searchRestaurant.name.toLowerCase().includes(keyword.toLowerCase()) 
-//           || searchRestaurant.category.toLowerCase().includes(keyword.toLowerCase())
-//       })
-//       res.render('index', { restaurants, keyword })
-//     })
-//     .catch(err => console.log(err))
-// })
-
+// 搜尋頁面
 app.get("/search", (req, res) => {
   if (!req.query.keyword) {
     res.redirect("/")
