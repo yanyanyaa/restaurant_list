@@ -126,3 +126,8 @@ i {
 .newContainer {
   max-width: 500px;
 }
+
+.sort-bar {
+  margin: 0 auto;
+  max-width: 680px;
+}

@@ -15,21 +15,29 @@ router.get('/', (req, res) => {
     .catch(error => console.log('error'))
 })
 
+// 排序功能
+router.get('/sort/:sortBy', (req, res) => {
+  const sortBy = req.params.sortBy
+  Restaurant.find()
+    .lean()
+    .sort({ [sortBy]: 'asc' })
+    .then( restaurants => res.render('index', { restaurants }))
+    .catch(err => console.log(err))
+})
+
 // 搜尋功能
 router.get("/search", (req, res) => {
   if (!req.query.keyword) {
     res.redirect("/")
   }
-
   const keyword = req.query.keyword.trim().toLowerCase()
-
   Restaurant.find({})
     .lean()
     .then(restaurantsData => {
       const restaurants = restaurantsData.filter(
         data =>
-          data.name.trim().toLowerCase().includes(keyword.trim().toLowerCase()) ||
-          data.category.trim().toLowerCase().includes(keyword.trim().toLowerCase())
+          data.name.trim().toLowerCase().includes(keyword) ||
+          data.category.trim().toLowerCase().includes(keyword)
       )
       res.render('index', { restaurants, keyword })
     })
