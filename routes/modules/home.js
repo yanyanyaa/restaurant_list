@@ -21,14 +21,14 @@ router.get('/sort/:sortBy', (req, res) => {
   Restaurant.find()
     .lean()
     .sort({ [sortBy]: 'asc' })
-    .then( restaurants => res.render('index', { restaurants }))
+    .then(restaurants => res.render('index', { restaurants }))
     .catch(err => console.log(err))
 })
 
 // 搜尋功能
-router.get("/search", (req, res) => {
+router.get('/search', (req, res) => {
   if (!req.query.keyword) {
-    res.redirect("/")
+    res.redirect('/')
   }
   const keyword = req.query.keyword.trim().toLowerCase()
   Restaurant.find({})
@@ -43,7 +43,6 @@ router.get("/search", (req, res) => {
     })
     .catch(err => console.log(err))
 })
-
 
 // 匯出路由模組
 module.exports = router

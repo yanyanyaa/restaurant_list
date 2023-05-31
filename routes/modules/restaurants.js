@@ -35,7 +35,7 @@ router.get('/:id/edit', (req, res) => {
   return Restaurant.findById(id)
     .lean()
     .then((restaurant) => res.render('edit', { restaurant }))
-    .catch((err => console.log(err)))
+    .catch(err => console.log(err))
 })
 
 // 更新特定餐廳資訊（按下更新後）

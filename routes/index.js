@@ -8,10 +8,9 @@ const router = express.Router()
 const home = require('./modules/home')
 const restaurants = require('./modules/restaurants')
 
-// 將網址結構符合該字串的 request 導向該模組 
-router.use('/', home) 
+// 將網址結構符合該字串的 request 導向該模組
+router.use('/', home)
 router.use('/restaurants', restaurants)
-
 
 // 匯出路由器
 module.exports = router

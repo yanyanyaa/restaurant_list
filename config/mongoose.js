@@ -1,4 +1,4 @@
-const mongoose = require("mongoose")
+const mongoose = require('mongoose')
 
 if (process.env.NODE_ENV !== 'production') {
   require('dotenv').config()
@@ -14,6 +14,5 @@ db.on('error', () => {
 db.once('open', () => {
   console.log('mongodb connected!')
 })
-
 
 module.exports = db

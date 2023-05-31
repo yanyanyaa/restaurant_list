@@ -6,7 +6,7 @@ db.once('open', () => {
   console.log('mongodb connected!')
   Restaurant.create(restaurantList.results)
     .then(() => {
-      console.log("restaurantSeeder done!")
+      console.log('staurantSeeder done!')
       db.close()
     })
     .catch(err => console.log(err))
