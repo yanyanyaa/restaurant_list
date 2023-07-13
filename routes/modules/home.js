@@ -12,7 +12,7 @@ router.get('/', (req, res) => {
     .lean()
     .sort({ _id: 'asc' })
     .then(restaurants => res.render('index', { restaurants }))
-    .catch(error => console.log('error'))
+    .catch(err => console.log(err))
 })
 
 // 排序功能
@@ -20,7 +20,7 @@ router.get('/sort/:sortBy', (req, res) => {
   const sortBy = req.params.sortBy
   Restaurant.find()
     .lean()
-    .sort({ [sortBy]: 'asc' })
+    .sort({ [sortBy]: 'desc' })
     .then(restaurants => res.render('index', { restaurants }))
     .catch(err => console.log(err))
 })
@@ -28,7 +28,7 @@ router.get('/sort/:sortBy', (req, res) => {
 // 搜尋功能
 router.get('/search', (req, res) => {
   if (!req.query.keyword) {
-    res.redirect('/')
+    return res.redirect('/')
   }
   const keyword = req.query.keyword.trim().toLowerCase()
   Restaurant.find({})
