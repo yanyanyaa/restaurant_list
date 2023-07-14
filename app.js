@@ -6,24 +6,27 @@ const methodOverride = require('method-override')
 const session = require('express-session')
 
 const routes = require('./routes')
+const usePassport = require('./config/passport')
 require('./config/mongoose')
 
 const app = express()
 const port = 3000
 
-// setting template engine
 app.engine('handlebars', exphbs({ defaultLayout: 'main' }))
 app.set('view engine', 'handlebars')
-// setting body-parser, method-override, static files, routes, express-session
-app.use(express.urlencoded({ extended: true }))
-app.use(methodOverride('_method'))
-app.use(express.static('public'))
-app.use(routes)
+
 app.use(session({
   secret: 'ThisIsMySecret',
   resave: false,
-  saveUnintialized: true
+  saveUninitialized: true
 }))
+
+app.use(express.urlencoded({ extended: true }))
+app.use(methodOverride('_method'))
+app.use(express.static('public'))
+
+usePassport(app)
+app.use(routes)
 
 app.listen(port, () => {
   console.log(`Express is listening on localhost:${port}`)

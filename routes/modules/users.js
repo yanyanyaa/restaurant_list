@@ -1,14 +1,19 @@
-// 載入 Express 與 Express 路由器
 const express = require('express')
 const router = express.Router()
-const User = require('../../models/user.js')
+const passport = require('passport')
 
-// 定義路由
+const User = require('../../models/user.js')
 
 // 登入頁
 router.get('/login', (req, res) => {
   res.render('login')
 })
+
+// 登入
+router.post('/login', passport.authenticate('local', {
+  successRedirect: '/',
+  failureRedirect: '/users/login'
+}))
 
 // 註冊頁
 router.get('/register', (req, res) => {
@@ -37,7 +42,7 @@ router.post('/register', (req, res) => {
         .catch(err => console.log(err))
     }
   })
-  .catch(err => console.log(err))
+    .catch(err => console.log(err))
 })
 
 // 匯出路由器
