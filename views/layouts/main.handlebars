@@ -19,19 +19,24 @@
       <a class="navbar-brand" href="/">
         <img src="https://assets-lighthouse.s3.amazonaws.com/uploads/image/file/6227/restaurant-list-logo.png" width="30"
           height="30" class="d-inline-block align-top" alt="我的餐廳清單">
-        我的餐廳清單
+        {{#if isAuthenticated}}{{ user.name }}{{/if}}
+        的餐廳清單
       </a>
+      {{#if isAuthenticated}}
       <div class="d-flex justify-content-end mt-3">
-        <a class="btn btn-warning btn-sm" href="/restaurants/new" role="button">Add</a>
+        <a class="btn btn-warning btn-sm mx-1" href="/restaurants/new" role="button">Add</a>
+        <a class="btn btn-warning btn-sm" href="/users/logout" method="POST" ole="button">Logout</a>
       </div>
+      {{else}}
       <div class="d-flex justify-content-end mt-3">
-        <a class="btn btn-warning btn-sm" href="/users/logout" method="POST" ole="button">logout</a>
+        <a class="btn btn-warning btn-sm" href="/users/login" method="get" ole="button">Login</a>
       </div>
+      {{/if}}
     </div>
   </nav>
   
   <div class="banner"></div>
-
+  
   <!-- partial templates will replace the part of "body" here -->
   {{{ body }}}
 
