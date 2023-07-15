@@ -5,6 +5,7 @@ const express = require('express')
 const router = express.Router()
 // 載入 restaurant model
 const Restaurant = require('../../models/restaurant')
+const restaurant = require('../../models/restaurant')
 
 // 定義路由
 
@@ -15,15 +16,17 @@ router.get('/new', (req, res) => {
 
 // 新增餐廳（按下新增後）
 router.post('/', (req, res) => {
-  return Restaurant.create(req.body)
+  const userId = req.user._id
+  return Restaurant.create({ ...req.body, userId })
     .then(() => res.redirect('/'))
     .catch(err => console.log(err))
 })
 
 // 瀏覽特定餐廳頁面
 router.get('/:id', (req, res) => {
-  const id = req.params.id
-  return Restaurant.findById(id)
+  const userId = req.user._id
+  const _id = req.params.id
+  return Restaurant.findOne({ _id, userId })
     .lean()
     .then((restaurant) => res.render('show', { restaurant }))
     .catch(err => console.log(err))
@@ -31,8 +34,9 @@ router.get('/:id', (req, res) => {
 
 // 更新特定餐廳資訊表單頁
 router.get('/:id/edit', (req, res) => {
-  const id = req.params.id
-  return Restaurant.findById(id)
+  const userId = req.user._id
+  const _id = req.params.id
+  return Restaurant.findOne({ _id, userId })
     .lean()
     .then((restaurant) => res.render('edit', { restaurant }))
     .catch(err => console.log(err))
@@ -40,17 +44,31 @@ router.get('/:id/edit', (req, res) => {
 
 // 更新特定餐廳資訊（按下更新後）
 router.put('/:id', (req, res) => {
-  const id = req.params.id
-  return Restaurant.findByIdAndUpdate(id, req.body)
-    .then(() => res.redirect(`/restaurants/${id}`))
+  const userId = req.user._id
+  const _id = req.params.id
+  const { name, name_en, category, image, location, phone, google_map, rating, description } = req.body
+  return Restaurant.findOne({ _id, userId })
+    .then(restaurant => {
+      restaurant.name = name
+      restaurant.name_en = name_en
+      restaurant.category = category 
+      restaurant.image = image
+      restaurant.location = location
+      restaurant.phone = phone
+      restaurant.google_map = google_map
+      restaurant.rating = rating
+      restaurant.description = description
+      return restaurant.save() 
+    })
+    .then(() => res.redirect(`/restaurants/${_id}`))
     .catch(err => console.log(err))
 })
 
-// 刪除頁面
+// 刪除餐廳
 router.delete('/:id', (req, res) => {
-  const id = req.params.id
-  return Restaurant.findById(id)
-    .then(restaurant => restaurant.remove())
+  const userId = req.user._id
+  const _id = req.params.id
+  return Restaurant.findByIdAndDelete({ _id, userId })
     .then(() => res.redirect('/'))
     .catch(err => console.log(err))
 })
