@@ -18,8 +18,9 @@ router.get('/', (req, res) => {
 
 // 排序功能
 router.get('/sort/:sortBy', (req, res) => {
+  const userId = req.user._id
   const sortBy = req.params.sortBy
-  Restaurant.find()
+  Restaurant.find({ userId })
     .lean()
     .sort({ [sortBy]: 'desc' })
     .then(restaurants => res.render('index', { restaurants }))
@@ -28,11 +29,12 @@ router.get('/sort/:sortBy', (req, res) => {
 
 // 搜尋功能
 router.get('/search', (req, res) => {
+  const userId = req.user._id
   if (!req.query.keyword) {
     return res.redirect('/')
   }
   const keyword = req.query.keyword.trim().toLowerCase()
-  Restaurant.find({})
+  Restaurant.find({ userId })
     .lean()
     .then(restaurantsData => {
       const restaurants = restaurantsData.filter(
