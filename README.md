@@ -1,4 +1,4 @@
-![image]([picture or gif url](https://github.com/yanyanyaa/restaurant_list/blob/main/cover.png))
+![image](https://github.com/yanyanyaa/restaurant_list/blob/main/cover.png)
 
 ## Restaurant List
 這是一個餐廳網站，使用者可透過註冊會員來建立個人的收藏清單
@@ -46,10 +46,11 @@ Express is listening on localhost:3000
 ```
 
 8. 可透過預設帳號登入網站
-| Name  |       Email       | Password |
-|-------|-------------------|----------|
-| user1 | user1@example.com | 12345678 |
-| user2 | user2@example.com | 12345678 |
+|Name |Email            |Password|
+|-----|-----------------|--------|
+|user1|user1@example.com|12345678|
+|user2|user2@example.com|12345678|
+
 
 ---
 ### 開發工具
