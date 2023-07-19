@@ -7,11 +7,17 @@ const User = require('../../models/user.js')
 
 // 登入頁
 router.get('/login', (req, res) => {
-  res.render('login')
+  const userInput = req.session.userInput || {}
+  delete req.session.userInput
+  res.render('login', { email: userInput.email, password: userInput.password })
 })
 
 // 登入
-router.post('/login', passport.authenticate('local', {
+router.post('/login', (req, res, next) => {
+  const {email, password} = req.body
+  req.session.userInput = {email, password}
+  next()
+}, passport.authenticate('local', {
   successRedirect: '/',
   failureRedirect: '/users/login'
 }))
