@@ -46,6 +46,7 @@ Express is listening on localhost:3000
 ```
 
 8. 可透過預設帳號登入網站
+   
 |Name |Email            |Password|
 |-----|-----------------|--------|
 |user1|user1@example.com|12345678|
